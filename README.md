@@ -4,14 +4,6 @@ This repository contains a prototype for a Retrieval-Augmented Generation (RAG) 
 
 ## Setup
 
-### Prerequisites
-
-- [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
-- [Python 3.10](https://www.python.org/downloads/)
-- [pyenv](https://github.com/pyenv/pyenv)
-- [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
-- [python-dotenv](https://pypi.org/project/python-dotenv/)
-
 ### Installation
 
 1. Clone the repository:
