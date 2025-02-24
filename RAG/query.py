@@ -14,7 +14,6 @@ load_dotenv()
 markdown_dir = os.getenv('MARKDOWN_DIR')
 output_file_path = os.getenv('OUTPUT_FILE_PATH')
 faiss_index_path = os.getenv('FAISS_INDEX_PATH')
-print(os.getenv('OPENAI_API_KEY'))
 client = OpenAI(
   api_key=os.getenv('OPENAI_API_KEY')
 )
@@ -32,9 +31,15 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 def retrieve_relevant_docs(query, k=15):
     query_embedding = model.encode([query])
     distances, indices = index.search(np.array(query_embedding), k)
-    results = [docs[i] for i in indices[0]]
-    return results
-# Load API key from .env file
+    # Filter out invalid indices
+    valid_results = []
+    for i in indices[0]:
+        if 0 <= i < len(docs):
+            valid_results.append(docs[i])
+        else:
+            # Optionally, log or handle the invalid index
+            print(f"Invalid index encountered: {i}")
+    return valid_results
 
 
 def generate_response(query):
